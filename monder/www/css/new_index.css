@@ -1,0 +1,16 @@
+#login {
+    visibility: visible;
+    
+}
+
+#swipe {
+    visibility: hidden;
+    
+}
+
+#swipearea {
+    background: red;
+    width: 500px;
+    height: 500px;
+    position: fixed;
+}
