@@ -1,86 +1,40 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-//var app = {
-//    // Application Constructor
-//    initialize: function() {
-//      var element = document.getElementById('box');
-//      Hammer(element).on('swipeleft', function() {
-//          console.log('you swiped left me!');
-//          element.style.backgroundColor = 'white';
-//      });
-//      // this.onDeviceReady();
-//      //   this.bindEvents();
-//    },
-//    // Bind Event Listeners
-//    //
-//    // Bind any events that are required on startup. Common events are:
-//    // 'load', 'deviceready', 'offline', and 'online'.
-//    bindEvents: function() {
-//      document.addEventListener('deviceready', this.onDeviceReady, false);
-//    },
-//    // deviceready Event Handler
-//    //
-//    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-//    // function, we must explicitly call 'app.receivedEvent(...);'
-//    onDeviceReady: function() {
-//      var element = document.getElementById('box');
-//      element.style.backgroundColor = 'white';
-//      // Hammer(element).on('swipeleft', function() {
-//      //     console.log('you swiped left me!');
-//      // });
-//      //app.receivedEvent('deviceready');
-//    },
-//    // Update DOM on a Received Event
-//    receivedEvent: function(id) {
-//        var parentElement = document.getElementById(id);
-//        var listeningElement = parentElement.querySelector('.listening');
-//        var receivedElement = parentElement.querySelector('.received');
-//
-//        listeningElement.setAttribute('style', 'display:none;');
-//        receivedElement.setAttribute('style', 'display:block;');
-//
-//        console.log('Received Event: ' + id);
-//    }
-//};
 
-var images = ["img/movie2.jpg", "img/movie1.jpeg", "img/movie3.jpg", "img/movie1.jpeg", "img/movie2.jpg", "img/movie2.jpg"];
+var movies = new Array();
+
+//imgArray[0] = new Image();
+//imgArray[0].src = 'img/movie2.jpg';
+//
+//imgArray[1] = new Image();
+//imgArray[1].src = 'img/movie3.jpg';
 
 
 var myElement = document.getElementById('box');
+
+var host = 'http://172.27.6.118:8080/';
 
 // create a simple instance
 // by default, it only adds horizontal recognizers
 var mc = new Hammer(myElement);
 
+var uid = -1;
+
 mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
 function next() {
-    $("#box").css('background-image', 'url(' + images.shift() + ')');
+    var movie = movies[0];
+    $("#title").text(movie.title);
+    //$("#box").css('background-image', 'url(' + imgArray.shift().src + ')');
 }
 // listen to events...
 mc.on("swipeleft", function(ev) {
     ev.preventDefault();
+    $.ajax(host + 'feedback/' + uid + '/tt0111161/-55');
     next();
 });
-
+document.getElementById('emailfield').value = location.host;
 mc.on("swiperight", function(ev) {
     ev.preventDefault();
+    $.ajax(host + 'feedback/' + uid + '/tt0111161/-10');
     myElement.textContent = ev.type +" gesture detected.";
     next();
 });
@@ -98,6 +52,7 @@ mc.on("swipedown", function(ev) {
 });
 
 mc.on("tap", function(ev) {
+    $.ajax(host + 'feedback/' + uid + '/tt0111161/-10');
     myElement.textContent = ev.type +" gesture detected.";
     next();
 });
@@ -115,4 +70,17 @@ document.getElementById("menuButton").addEventListener("click", function() {
    } else {
     e.style.visibility = "hidden";
    }
+});
+
+// this is actually login
+document.getElementById("loginbutton").addEventListener("click", function() {
+    var username = document.getElementById("emailfield").value;
+    console.log(username);
+    $.ajax(host + 'getUserId/' + username, {
+        success: function(userId){
+            uid = userId;
+            $.ajax(host + 'getRecommendations/' + uid, { success: function(recommendations) { movies = recommendations; next(); } });
+        }
+    });
+    console.log(uid);
 });
