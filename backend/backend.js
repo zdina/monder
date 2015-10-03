@@ -11,6 +11,28 @@ var conString = 'postgres://' + dbuser + ':' + dbpass + '@localhost/monderdb';
 
 var monder = {};
 
+monder.getUserId = function(res, username) {
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
+    if(err) {
+      return console.error('could not connect to postgres', err);
+    }
+    client.query('SELECT user_id \
+                  FROM app_user \
+                  WHERE name=$1;', [username], function(err, result) {
+      if(err) {
+        return console.error('error running query', err);
+      }
+      if (result.rows.length > 0) {
+        res.send(result.rows[0].user_id);
+      } else {
+        res.send('User does not exist');
+      }
+      client.end();
+    });
+  });
+};
+
 monder.load = function(res, uid) {
   var client = new pg.Client(conString);
   client.connect(function(err) {
@@ -70,6 +92,12 @@ monder.init = function(res, uid) {
 };
 
 // start restful services
+app.get('/getUserId/*', function(req, res) {
+  var user = req.params[0];
+  console.log(user);
+  monder.getUserId(res, user);
+});
+
 app.get('/init/*', function(req, res) {
   var user = req.params[0];
   console.log(user);
