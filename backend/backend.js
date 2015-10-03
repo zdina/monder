@@ -1,13 +1,13 @@
+// Express
 var express = require('express');
 var app = express();
-
+// PythonShell
+var PythonShell = require('python-shell');
+// DB
 var pg = require('pg');
 var dbuser = 'dinazverinski';
 var dbpass = 'pg';
 var conString = 'postgres://' + dbuser + ':' + dbpass + '@localhost/monderdb';
-
-// username -> recommendations
-// get new recommendations
 
 var monder = {};
 
@@ -53,6 +53,28 @@ monder.feedback = function(res, uid, mid, feedback) {
   });
   res.send('done');
 };
+
+// training model for current user
+monder.init = function(res, uid) {
+  var pythonOptions = {
+    scriptPath: '../ML',
+    args: [uid]
+  };
+
+  PythonShell.run('train.py', pythonOptions, function (err) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution 
+    console.log('training done');
+    res.send('training done');
+  });
+};
+
+// start restful services
+app.get('/init/*', function(req, res) {
+  var user = req.params[0];
+  console.log(user);
+  monder.init(res, user);
+});
 
 app.get('/load/*', function(req, res) {
   var user = req.params[0];
