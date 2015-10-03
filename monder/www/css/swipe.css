@@ -1,0 +1,78 @@
+
+.movie-card {
+    width: 100%;
+    max-height: 65%;
+    text-align: center;
+    color: white;
+    padding: 15px 0 30px 0px;
+    line-height: 1.4;
+    background-color: #33393c;
+    text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
+}
+
+.movie-image {
+    height: auto;
+    max-width: 60%;
+    /*border-radius: 50%;*/
+    /*-webkit-border-radius: 50%;*/
+    background-color: black;
+    border: 1px solid white;
+    box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 0px 0px;
+    -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 0px 0px;
+}
+
+.movie-name {
+    margin: 0 0 0 0;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.movie-id {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.movie-desc {
+    font-size: 15px;
+    opacity: 0.6;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.info-col {
+    text-align:center;
+    height: 60px;
+    line-height: 1;
+    padding: 12px 0 12px;
+}
+
+.info-details {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.info-unit {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.4;
+}
+
+
+.tab {
+    line-height: 1;
+}
+
+.tab-icon {
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+}
+
+.tab-label {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
