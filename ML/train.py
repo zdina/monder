@@ -61,7 +61,7 @@ if n > 0:
 n = cursor.execute("select movie_id, poster from movie \
 	where not exists ( \
 		select movie_id from user_movie \
-		where user_id = ? and movie_id = movie.movie_id and opinion < 2)", user).rowcount
+		where user_id = ? and movie_id = movie.movie_id and opinion < 3)", user).rowcount
 
 X = np.zeros((n,f))
 movies = []
@@ -96,8 +96,8 @@ if classifier != None:
 	cursor.execute('update app_user set classifier=? where user_id=?', pickle.dumps(classifier), user)
 	# classifier = pickle.loads(...)
 
+cursor.execute('delete from recommendation where user_id=?', user)
 for i in range(n):
-	cursor.execute('delete from recommendation where user_id=? and movie_id=?', user, movies[i])
 	cursor.execute('insert into recommendation (user_id, movie_id, score) values (?,?,?)', user, movies[i], p[i])
 connection.commit();
 
