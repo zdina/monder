@@ -28,17 +28,24 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+
         <title>Hello World</title>
     </head>
     <body>
         <div class="app">
-            <div id="box">this is the boxa</div>
+            <header>
+                <div id="menuButton"></div>
+                <div id="title">Movie Title</div>
+            </header>
+            <div id="menu">Log In</div>
+            <div id="box"></div>
+            <footer><span>Info 1</span><span>Info 2</span><br>
+            <span>Info 3</span></footer>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/hammer.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+        
     </body>
 </html>

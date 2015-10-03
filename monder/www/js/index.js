@@ -16,45 +16,102 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
-    // Application Constructor
-    initialize: function() {
-      var element = document.getElementById('box');
-      Hammer(element).on('swipeleft', function() {
-          console.log('you swiped left me!');
-          element.style.backgroundColor = 'white';
-      });
-      // this.onDeviceReady();
-      //   this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-      document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-      var element = document.getElementById('box');
-      element.style.backgroundColor = 'white';
-      // Hammer(element).on('swipeleft', function() {
-      //     console.log('you swiped left me!');
-      // });
-      //app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+//var app = {
+//    // Application Constructor
+//    initialize: function() {
+//      var element = document.getElementById('box');
+//      Hammer(element).on('swipeleft', function() {
+//          console.log('you swiped left me!');
+//          element.style.backgroundColor = 'white';
+//      });
+//      // this.onDeviceReady();
+//      //   this.bindEvents();
+//    },
+//    // Bind Event Listeners
+//    //
+//    // Bind any events that are required on startup. Common events are:
+//    // 'load', 'deviceready', 'offline', and 'online'.
+//    bindEvents: function() {
+//      document.addEventListener('deviceready', this.onDeviceReady, false);
+//    },
+//    // deviceready Event Handler
+//    //
+//    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+//    // function, we must explicitly call 'app.receivedEvent(...);'
+//    onDeviceReady: function() {
+//      var element = document.getElementById('box');
+//      element.style.backgroundColor = 'white';
+//      // Hammer(element).on('swipeleft', function() {
+//      //     console.log('you swiped left me!');
+//      // });
+//      //app.receivedEvent('deviceready');
+//    },
+//    // Update DOM on a Received Event
+//    receivedEvent: function(id) {
+//        var parentElement = document.getElementById(id);
+//        var listeningElement = parentElement.querySelector('.listening');
+//        var receivedElement = parentElement.querySelector('.received');
+//
+//        listeningElement.setAttribute('style', 'display:none;');
+//        receivedElement.setAttribute('style', 'display:block;');
+//
+//        console.log('Received Event: ' + id);
+//    }
+//};
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+var colors = ["white", "red", "yellow", "green", "purple", "black"];
 
-        console.log('Received Event: ' + id);
-    }
-};
+var myElement = document.getElementById('box');
+
+// create a simple instance
+// by default, it only adds horizontal recognizers
+var mc = new Hammer(myElement);
+
+mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
+// listen to events...
+mc.on("swipeleft", function(ev) {
+    ev.preventDefault();
+    console.log("swipe left");
+    myElement.textContent = ev.type +" gesture detected.";
+    var rand = parseInt(Math.random() * colors.length);
+    console.log(rand);
+    myElement.style.backgroundColor = colors[rand];
+    
+   
+});
+
+mc.on("panright", function(ev) {
+    myElement.textContent = ev.type +" gesture detected.";
+    myElement.style.backgroundColor = "red";
+});
+
+mc.on("panup", function(ev) {
+    myElement.textContent = ev.type +" gesture detected.";
+    myElement.style.backgroundColor = "yellow";
+});
+
+mc.on("pandown", function(ev) {
+    myElement.textContent = ev.type +" gesture detected.";
+    myElement.style.backgroundColor = "green";
+});
+
+mc.on("tap press", function(ev) {
+    myElement.textContent = ev.type +" gesture detected.";
+    myElement.style.backgroundColor = "purple";
+});
+
+mc.on("press", function(ev) {
+    myElement.textContent = ev.type +" gesture detected.";
+    myElement.style.backgroundColor = "black";
+});
+
+document.getElementById("menuButton").addEventListener("click", function() {
+   var e = document.getElementById("menu");
+   console.log(e.style.visibility);
+   if (e.style.visibility == "hidden") {
+    e.style.visibility = "visible";
+   } else {
+    e.style.visibility = "hidden";
+   }
+});
