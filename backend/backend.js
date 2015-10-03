@@ -43,7 +43,7 @@ monder.feedback = function(res, uid, mid, feedback) {
       return console.error('could not connect to postgres', err);
     }
     client.query('INSERT INTO user_movie \
-                  VALUES ($1, $2, $3);', 
+                  VALUES ($1, $2, $3);',
                   [uid, mid, feedback], function(err, result) {
       if(err) {
         return console.error('error running query', err);
@@ -56,7 +56,7 @@ monder.feedback = function(res, uid, mid, feedback) {
 app.get('/load/*', function(req, res) {
   var user = req.params[0];
   console.log(user);
-  monder.load(res, uid);
+  monder.load(res, user);
 });
 
 app.get('/feedback/*/*/*', function(req, res) {
@@ -69,4 +69,3 @@ app.get('/feedback/*/*/*', function(req, res) {
 var server = app.listen(8080, function() {
   console.log('server listening :p');
 });
-
