@@ -59,7 +59,8 @@
 //    }
 //};
 
-var colors = ["white", "red", "yellow", "green", "purple", "black"];
+var images = ["img/movie2.jpg", "img/movie1.jpeg", "img/movie3.jpg", "img/movie1.jpeg", "img/movie2.jpg", "img/movie2.jpg"];
+
 
 var myElement = document.getElementById('box');
 
@@ -69,42 +70,41 @@ var mc = new Hammer(myElement);
 
 mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
+function next() {
+    $("#box").css('background-image', 'url(' + images.shift() + ')');
+}
 // listen to events...
 mc.on("swipeleft", function(ev) {
     ev.preventDefault();
-    console.log("swipe left");
-    myElement.textContent = ev.type +" gesture detected.";
-    var rand = parseInt(Math.random() * colors.length);
-    console.log(rand);
-    myElement.style.backgroundColor = colors[rand];
+    next();
 });
 
 mc.on("swiperight", function(ev) {
     ev.preventDefault();
     myElement.textContent = ev.type +" gesture detected.";
-    myElement.style.backgroundColor = "red";
+    next();
 });
 
 mc.on("swipeup", function(ev) {
     ev.preventDefault();
     myElement.textContent = ev.type +" gesture detected.";
-    myElement.style.backgroundColor = "yellow";
+    next();
 });
 
 mc.on("swipedown", function(ev) {
     ev.preventDefault();
     myElement.textContent = ev.type +" gesture detected.";
-    myElement.style.backgroundColor = "green";
+    next();
 });
 
 mc.on("tap", function(ev) {
     myElement.textContent = ev.type +" gesture detected.";
-    myElement.style.backgroundColor = "purple";
+    next();
 });
 
 mc.on("press", function(ev) {
     myElement.textContent = ev.type +" gesture detected.";
-    myElement.style.backgroundColor = "black";
+    next();
 });
 
 document.getElementById("menuButton").addEventListener("click", function() {
