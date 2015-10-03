@@ -52,7 +52,7 @@ monder.load = function(res, uid) {
       }
       if (result.rows.length > 0) {
         // trololololo do stuff with recommendations
-        res.send(result.rows[0].movie_id);
+        res.send(result.rows);
       } else {
         res.send('oops this is embarassing :/ no recommendations');
       }
