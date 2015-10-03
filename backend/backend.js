@@ -107,7 +107,7 @@ app.get('/init/*', function(req, res) {
   monder.init(res, user);
 });
 
-app.get('/load/*', function(req, res) {
+app.get('/getRecommendations/*', function(req, res) {
   var user = req.params[0];
   console.log(user);
   monder.load(res, user);
