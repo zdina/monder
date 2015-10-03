@@ -1,6 +1,9 @@
 // Express
 var express = require('express');
 var app = express();
+var cors = require('cors');
+
+app.use(cors());
 // PythonShell
 var PythonShell = require('python-shell');
 // DB
