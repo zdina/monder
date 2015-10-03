@@ -77,26 +77,27 @@ mc.on("swipeleft", function(ev) {
     var rand = parseInt(Math.random() * colors.length);
     console.log(rand);
     myElement.style.backgroundColor = colors[rand];
-    
-   
 });
 
-mc.on("panright", function(ev) {
+mc.on("swiperight", function(ev) {
+    ev.preventDefault();
     myElement.textContent = ev.type +" gesture detected.";
     myElement.style.backgroundColor = "red";
 });
 
-mc.on("panup", function(ev) {
+mc.on("swipeup", function(ev) {
+    ev.preventDefault();
     myElement.textContent = ev.type +" gesture detected.";
     myElement.style.backgroundColor = "yellow";
 });
 
-mc.on("pandown", function(ev) {
+mc.on("swipedown", function(ev) {
+    ev.preventDefault();
     myElement.textContent = ev.type +" gesture detected.";
     myElement.style.backgroundColor = "green";
 });
 
-mc.on("tap press", function(ev) {
+mc.on("tap", function(ev) {
     myElement.textContent = ev.type +" gesture detected.";
     myElement.style.backgroundColor = "purple";
 });
