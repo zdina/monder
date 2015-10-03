@@ -381,8 +381,6 @@ ALTER TABLE ONLY user_movie
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM dinazverinski;
-GRANT ALL ON SCHEMA public TO dinazverinski;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
