@@ -51,6 +51,7 @@ monder.feedback = function(res, uid, mid, feedback) {
       client.end();
     });
   });
+  res.send('done');
 };
 
 app.get('/load/*', function(req, res) {
