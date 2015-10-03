@@ -1,5 +1,6 @@
 
 var movies = new Array();
+var movie = null;
 
 //imgArray[0] = new Image();
 //imgArray[0].src = 'img/movie2.jpg';
@@ -21,20 +22,20 @@ var uid = -1;
 mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
 function next() {
-    var movie = movies[0];
+    movie = movies[0];
     $("#title").text(movie.title);
     //$("#box").css('background-image', 'url(' + imgArray.shift().src + ')');
 }
 // listen to events...
 mc.on("swipeleft", function(ev) {
     ev.preventDefault();
-    $.ajax(host + 'feedback/' + uid + '/tt0111161/-55');
+    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/-55');
     next();
 });
 document.getElementById('emailfield').value = location.host;
 mc.on("swiperight", function(ev) {
     ev.preventDefault();
-    $.ajax(host + 'feedback/' + uid + '/tt0111161/-10');
+    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/-10');
     myElement.textContent = ev.type +" gesture detected.";
     next();
 });
