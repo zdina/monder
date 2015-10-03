@@ -2,13 +2,6 @@
 var movies = new Array();
 var movie = null;
 
-//imgArray[0] = new Image();
-//imgArray[0].src = 'img/movie2.jpg';
-//
-//imgArray[1] = new Image();
-//imgArray[1].src = 'img/movie3.jpg';
-
-
 var myElement = document.getElementById('box');
 
 var host = 'http://172.27.6.118:8080/';
@@ -22,46 +15,44 @@ var uid = -1;
 mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
 function next() {
-    movie = movies[0];
+    movie = movies.shift();
     $("#title").text(movie.title);
-    //$("#box").css('background-image', 'url(' + imgArray.shift().src + ')');
+    $("#box").css('background-image', 'url(' + movie.poster_url + ')');
 }
 // listen to events...
 mc.on("swipeleft", function(ev) {
     ev.preventDefault();
-    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/-55');
+    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/0');
     next();
 });
 document.getElementById('emailfield').value = location.host;
 mc.on("swiperight", function(ev) {
     ev.preventDefault();
-    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/-10');
-    myElement.textContent = ev.type +" gesture detected.";
+    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/1');
     next();
 });
 
 mc.on("swipeup", function(ev) {
     ev.preventDefault();
-    myElement.textContent = ev.type +" gesture detected.";
+    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/3');
     next();
 });
 
 mc.on("swipedown", function(ev) {
     ev.preventDefault();
-    myElement.textContent = ev.type +" gesture detected.";
+    $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/2');
     next();
 });
 
 mc.on("tap", function(ev) {
-    $.ajax(host + 'feedback/' + uid + '/tt0111161/-10');
-    myElement.textContent = ev.type +" gesture detected.";
-    next();
+    // make div visible for details and toggle
+    // TODOOOOOOOOO
 });
 
-mc.on("press", function(ev) {
-    myElement.textContent = ev.type +" gesture detected.";
-    next();
-});
+//mc.on("press", function(ev) {
+//    myElement.textContent = ev.type +" gesture detected.";
+//    next();
+//});
 
 document.getElementById("menuButton").addEventListener("click", function() {
    var e = document.getElementById("menu");
