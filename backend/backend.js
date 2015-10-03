@@ -43,9 +43,9 @@ monder.load = function(res, uid) {
       return console.error('could not connect to postgres', err);
     }
     client.query('SELECT * \
-                  FROM recommendation \
-                  WHERE user_id=$1 \
-                  ORDER BY score DESC \
+                  FROM recommendation r, movie m \
+                  WHERE r.user_id=$1 AND r.movie_id=m.movie_id \
+                  ORDER BY r.score DESC \
                   LIMIT 10;', [uid], function(err, result) {
       if(err) {
         return console.error('error running query', err);
