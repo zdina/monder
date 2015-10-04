@@ -95,7 +95,7 @@ monder.actors = function(res, mid) {
     }
     client.query('SELECT p.* \
                   FROM person p, movie_actor ma \
-                  WHERE ma.movie_id=$1 p.person_id=ma.actor_id \
+                  WHERE ma.movie_id=$1 AND p.person_id=ma.actor_id \
                   ORDER BY p.lastname DESC;', [mid], function(err, result) {
       if(err) {
         return console.error('error running query', err);
@@ -118,7 +118,7 @@ monder.directors = function(res, mid) {
     }
     client.query('SELECT p.* \
                   FROM person p, movie_director md \
-                  WHERE md.movie_id=$1 p.person_id=md.director_id \
+                  WHERE md.movie_id=$1 AND p.person_id=md.director_id \
                   ORDER BY p.lastname DESC;', [mid], function(err, result) {
       if(err) {
         return console.error('error running query', err);
