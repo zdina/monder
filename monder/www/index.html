@@ -32,20 +32,49 @@
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <header>
-                <div id="menuButton"></div>
-                <div id="title">Movie Title</div>
-            </header>
-            <div id="menu">Log In
-            <h1 class="register-title">WELCOME</h1>
-                <input type="text" class="register-input" placeholder="Dino" value="Dino" id="emailfield">
-                <div id="loginbutton">LOG IN</div>
+        
+        <div id="login">
+            <div class="header">Log In</div>
+            <div id="loginContent">
+            <h1>Welcome!</h1>
+            <input type="text" class="register-input" placeholder="Username" value="" id="usernamefield"><br>
+            <input type="password" class="register-input" placeholder="Password" id="passwordfield">
+            <div id="loginbutton">LOG IN</div>
             </div>
-            <div id="box"></div>
-            <footer><span>Info 1</span><span>Info 2</span><br>
-            <span>Info 3</span></footer>
         </div>
+        
+        <div id="swipe">
+            <div class="header">Movies</div>
+            <img src="" id="poster"></div>
+            <div id="movieTitle"></div>
+            <div id="shortDetails">
+                <div class="infocol">Genre:
+                    <div class="content"></div>
+                </div>
+                <div class="infocol">Duration:
+                    <div class="content"></div>
+                </div>
+                <div class="infocol">Rating:
+                    <div class="content"></div>
+                </div>
+            </div>
+        <!-- FOOTER MENU -->
+        </div>
+        
+        <div id="details">
+            <div class="header">Movie Details</div>
+        </div>
+        
+            <div id="menu">
+                <div class="header">Menu</div>
+                <div class="menuPoint">Friends</div>
+                <div class="menuPoint">Watchlist</div>
+                <div class="menuPoint">Settings</div>
+                <div class="menuPoint">Account</div>
+                <div class="menuPoint">Log Out</div>
+            
+        </div>
+        
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
         <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="js/hammer.js"></script>

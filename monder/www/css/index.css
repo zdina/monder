@@ -1,24 +1,63 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
+
+
+
+
+
+
+
+
 
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
@@ -26,58 +65,63 @@ body {
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    margin-top: 20px;
-    padding:0px;
-    text-transform:uppercase;
-    width:100%;
+
 }
 
 
-
-
-
-
-
-
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+#login {
+    display: block;
 }
 
-@-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+#menu {
+    display: none;
 }
 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
+#swipe {
+    display: none;
 }
 
-.app {
+#details {
+    display: none;
+}
+
+.header {
+    width: 100%;
+    background: white;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-size: 1.4em;
+    font-weight: bold;
+    height: 50%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#loginContent {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5em;
     width: 100%;
     height: 100%;
-    position:absolute;             /* position in the center of the screen */
-    text-align:center;
+    background: lightgrey;
+    position: absolute;
 }
-#box {
+
+h1 {
+    margin: 10%;
+}
+
+
+
+/*#box {
   background-image: url("../img/logo.png");
   background-size: cover;
   height: 100%;
   width: 100%;
 }
 
-header {
-    position: fixed;
-    width: 100%;
-    background: white;
-    opacity: 0.5;
-}
+
 
 #menuButton {
     display: inline;
@@ -96,14 +140,6 @@ header {
     font-weight: bold;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    text-align: center;
-    background: white;
-    opacity: 0.5;
-    width: 100%;
-}
 
 #menu {
     position: fixed;
@@ -114,122 +150,4 @@ footer {
     width: 80%;
     margin: 20% 10% auto;
     height: 70%;
-}
-
-.register-title {
-    width: 100%;
-    line-height: 43px;
-    margin: 20% auto 20px;
-    font-size: 19px;
-    font-weight: 500;
-    color: black;
-    /*color: rgba(255, 255, 255, 0.95);*/
-    text-align: center;
-    /*text-shadow: 0 1px rgba(0, 0, 0, 0.3);*/
-    background: #FFFFFF;
-    border-radius: 0px;
-    /*background-image: -webkit-linear-gradient(top, #dc745e, #d45742);*/
-    /*background-image: -moz-linear-gradient(top, #dc745e, #d45742);*/
-    /*background-image: -o-linear-gradient(top, #dc745e, #d45742);*/
-    /*background-image: linear-gradient(to bottom, #dc745e, #d45742);*/
-    /*-webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3);*/
-    /*box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3);*/
-}
-
-.register {
-    margin: 0 auto;
-    width: 90%;
-    height: 40%;
-    padding: 0 auto;
-    background: #ffffff;
-    border-radius: 3px;
-    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-input {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.register-input {
-    display: block;
-    width: 90%;
-    height: 38px;
-    margin:2px auto 2px;
-    font-weight: 500;
-    background: none;
-    border: 0;
-    border-bottom: 1px solid #d8d8d8;
-}
-.register-input:focus {
-    border-color: #1e9ce6;
-    outline: 0;
-}
-
-.register-button {
-    display: block;
-    width: 90%;
-    height: 42px;
-    margin: 5% 5% 5%;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000000;
-    text-align: center;
-    /*text-shadow: 0 1px rgba(255, 255, 255, 0.5);*/
-    background: #25C13B;
-    border: 1px solid;
-    border-color: #25C13B;
-    border-radius: 0px;
-    cursor: pointer;
-    /*background-image: -webkit-linear-gradient(top, #fefefe, #eeeeee);*/
-    /*background-image: -moz-linear-gradient(top, #fefefe, #eeeeee);*/
-    /*background-image: -o-linear-gradient(top, #fefefe, #eeeeee);*/
-    /*background-image: linear-gradient(to bottom, #fefefe, #eeeeee);*/
-    /*-webkit-box-shadow: inset 0 -1px rgba(0, 0, 0, 0.03), 0 1px rgba(0, 0, 0, 0.04);*/
-    /*box-shadow: inset 0 -1px rgba(0, 0, 0, 0.03), 0 1px rgba(0, 0, 0, 0.04);*/
-}
-.register-button:active {
-    background: #eee;
-    border-color: #25C13B;
-    /*background-image: -webkit-linear-gradient(top, #eeeeee, #fcfcfc);*/
-    /*background-image: -moz-linear-gradient(top, #eeeeee, #fcfcfc);*/
-    /*background-image: -o-linear-gradient(top, #eeeeee, #fcfcfc);*/
-    /*background-image: linear-gradient(to bottom, #eeeeee, #fcfcfc);*/
-    /*-webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.03);*/
-    /*box-shadow: inset 0 1px rgba(0, 0, 0, 0.03);*/
-}
-.register-button:focus {
-    outline: 0;
-}
-
-
-:-moz-placeholder {
-    color: #aaa;
-    font-weight: 300;
-}
-
-::-moz-placeholder {
-    color: #aaa;
-    font-weight: 300;
-    opacity: 1;
-}
-
-::-webkit-input-placeholder {
-    color: #aaa;
-    font-weight: 300;
-}
-
-:-ms-input-placeholder {
-    color: #aaa;
-    font-weight: 300;
-}
-
-::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-}
+}*/

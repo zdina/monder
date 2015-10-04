@@ -2,7 +2,7 @@
 var movies = new Array();
 var movie = null;
 
-var myElement = document.getElementById('box');
+var myElement = document.getElementById('poster');
 
 var host = 'http://172.27.6.118:8080/';
 
@@ -17,7 +17,7 @@ mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 function next() {
     movie = movies.shift();
     $("#title").text(movie.title);
-    $("#box").css('background-image', 'url(' + movie.poster_url + ')');
+    $("#poster").attr('src', movie.poster_url);
 }
 // listen to events...
 mc.on("swipeleft", function(ev) {
@@ -25,7 +25,7 @@ mc.on("swipeleft", function(ev) {
     $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/0');
     next();
 });
-document.getElementById('emailfield').value = location.host;
+//document.getElementById('emailfield').value = location.host;
 mc.on("swiperight", function(ev) {
     ev.preventDefault();
     $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/1');
@@ -54,24 +54,31 @@ mc.on("tap", function(ev) {
 //    next();
 //});
 
-document.getElementById("menuButton").addEventListener("click", function() {
-   var e = document.getElementById("menu");
-   console.log(e.style.visibility);
-   if (e.style.visibility == "hidden") {
-    e.style.visibility = "visible";
-   } else {
-    e.style.visibility = "hidden";
-   }
-});
+//document.getElementById("menuButton").addEventListener("click", function() {
+//   var e = document.getElementById("menu");
+//   console.log(e.style.visibility);
+//   if (e.style.visibility == "hidden") {
+//    e.style.visibility = "visible";
+//   } else {
+//    e.style.visibility = "hidden";
+//   }
+//});
 
 // this is actually login
 document.getElementById("loginbutton").addEventListener("click", function() {
-    var username = document.getElementById("emailfield").value;
+    console.log('ok');
+    var username = document.getElementById("usernamefield").value;
     console.log(username);
     $.ajax(host + 'getUserId/' + username, {
         success: function(userId){
             uid = userId;
-            $.ajax(host + 'getRecommendations/' + uid, { success: function(recommendations) { movies = recommendations; next(); } });
+            $.ajax(host + 'getRecommendations/' + uid, { success: function(recommendations) {
+                movies = recommendations;
+                next();
+                document.getElementById("login").style.display = "none";
+                document.getElementById("swipe").style.display = "block";
+                }
+            });
         }
     });
     console.log(uid);
