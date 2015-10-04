@@ -87,6 +87,52 @@ monder.loadTwo = function(res, uid1, uid2) {
   });
 };
 
+monder.actors = function(res, mid) {
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
+    if(err) {
+      return console.error('could not connect to postgres', err);
+    }
+    client.query('SELECT p.* \
+                  FROM person p, movie_actor ma \
+                  WHERE ma.movie_id=$1 p.person_id=ma.actor_id \
+                  ORDER BY p.lastname DESC;', [mid], function(err, result) {
+      if(err) {
+        return console.error('error running query', err);
+      }
+      if (result.rows.length > 0) {
+        res.send(result.rows);
+      } else {
+        res.send([]);
+      }
+      client.end();
+    });
+  });
+};
+
+monder.directors = function(res, mid) {
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
+    if(err) {
+      return console.error('could not connect to postgres', err);
+    }
+    client.query('SELECT p.* \
+                  FROM person p, movie_director md \
+                  WHERE md.movie_id=$1 p.person_id=md.director_id \
+                  ORDER BY p.lastname DESC;', [mid], function(err, result) {
+      if(err) {
+        return console.error('error running query', err);
+      }
+      if (result.rows.length > 0) {
+        res.send(result.rows);
+      } else {
+        res.send([]);
+      }
+      client.end();
+    });
+  });
+};
+
 monder.feedback = function(res, uid, mid, feedback) {
   var client = new pg.Client(conString);
   client.connect(function(err) {
@@ -114,7 +160,7 @@ monder.init = function(res, uid) {
 
   PythonShell.run('train.py', pythonOptions, function (err) {
     if (err) throw err;
-    // results is an array consisting of messages collected during execution 
+    // results is an array consisting of messages collected during execution
     console.log('training done');
     res.send('training done');
   });
@@ -139,13 +185,24 @@ app.get('/getRecommendations/*', function(req, res) {
   monder.load(res, user);
 });
 
-
 app.get('/getRecommendations/*/*', function(req, res) {
   var user1 = req.params[0];
   var user2 = req.params[1];
   console.log(user1);
   console.log(user2);
   monder.loadTwo(res, user1, user2);
+});
+
+app.get('/getActors/*', function(req, res) {
+  var mid = req.params[0];
+  console.log(mid);
+  monder.actors(res, mid);
+});
+
+app.get('/getDirectors/*', function(req, res) {
+  var mid = req.params[0];
+  console.log(mid);
+  monder.directors(res, mid);
 });
 
 app.get('/feedback/*/*/*', function(req, res) {
