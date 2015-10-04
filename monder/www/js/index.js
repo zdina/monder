@@ -42,6 +42,9 @@ mc.on("swipedown", function(ev) {
     ev.preventDefault();
     $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/2');
     next();
+    $('#ufeedback').text('💩');
+    $('#ufeedback').style.opacity = 1;
+    $('#ufeedback').fadeOut(200);
 });
 
 mc.on("tap", function(ev) {
