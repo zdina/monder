@@ -16,11 +16,12 @@ mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
 function next() {
     movie = movies.shift();
-    $("#title").text(movie.title);
+    $("#movieTitle").text(movie.title);
     $("#poster").attr('src', movie.poster_url);
 }
 // listen to events...
 mc.on("swipeleft", function(ev) {
+    console.log("left");
     ev.preventDefault();
     $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/0');
     next();
