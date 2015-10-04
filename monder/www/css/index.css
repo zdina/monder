@@ -113,7 +113,7 @@ h1 {
 }
 
 #ufeedback {
-  opacity: 0;
+  display: none;
   position: fixed;
   width: 200px;
   height: 200px;

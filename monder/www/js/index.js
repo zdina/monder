@@ -43,9 +43,11 @@ mc.on("swipedown", function(ev) {
     ev.preventDefault();
     $.ajax(host + 'feedback/' + uid + '/' + movie.movie_id + '/2');
     next();
+    $('#ufeedback').style.display = 'block';
     $('#ufeedback').text('💩');
     $('#ufeedback').style.opacity = 1;
     $('#ufeedback').fadeOut(200);
+    $('#ufeedback').style.display = 'none';
 });
 
 mc.on("tap", function(ev) {
