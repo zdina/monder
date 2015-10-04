@@ -2,6 +2,9 @@
 var movies = new Array();
 var movie = null;
 
+var actors = [];
+var directors = [];
+
 var myElement = document.getElementById('poster');
 
 var host = 'http://172.27.6.118:8080/';
@@ -16,6 +19,14 @@ mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
 function next() {
     movie = movies.shift();
+    $.ajax(host + 'getActors/' + movie.movie_id, { success: function(a) {
+        actors = a;
+      };
+    });
+    $.ajax(host + 'getDirectors/' + movie.movie_id, { success: function(d) {
+        directors = d;
+      };
+    });
     $("#movieTitle").text(movie.title);
     $("#poster").attr('src', movie.poster_url);
 }
