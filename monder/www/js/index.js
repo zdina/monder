@@ -88,14 +88,16 @@ document.getElementById("loginbutton").addEventListener("click", function() {
     console.log(uid);
 });
 
-document.getElementById("linkfriend").addEventListener("click", function() {
-    var username = document.getElementById("friendfield").value;
-    console.log(username);
-    $.ajax(host + 'getUserId/' + username, {
-        success: function(userId){
-            var friendId = userId;
-            $.ajax(host + 'getRecommendations/' + uid + '/' + friendId, { success: function(recommendations) { movies = recommendations; next(); } });
-        }
-    });
-    console.log(uid);
-});
+if (document.getElementById("linkfriend")) {
+  document.getElementById("linkfriend").addEventListener("click", function() {
+      var username = document.getElementById("friendfield").value;
+      console.log(username);
+      $.ajax(host + 'getUserId/' + username, {
+          success: function(userId){
+              var friendId = userId;
+              $.ajax(host + 'getRecommendations/' + uid + '/' + friendId, { success: function(recommendations) { movies = recommendations; next(); } });
+          }
+      });
+      console.log(uid);
+  });
+}
