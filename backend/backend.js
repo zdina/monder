@@ -61,6 +61,32 @@ monder.load = function(res, uid) {
   });
 };
 
+monder.loadTwo = function(res, uid1, uid2) {
+  var client = new pg.Client(conString);
+  client.connect(function(err) {
+    if(err) {
+      return console.error('could not connect to postgres', err);
+    }
+    client.query('SELECT m.* \
+                  FROM recommendation r, movie m \
+                  WHERE (r.user_id=$1 OR r.user_id=$2) AND r.movie_id=m.movie_id \
+				  GROUP BY m.movie_id \
+                  ORDER BY sum(r.score) DESC \
+                  LIMIT 10;', [uid1,uid2], function(err, result) {
+      if(err) {
+        return console.error('error running query', err);
+      }
+      if (result.rows.length > 0) {
+        // trololololo do stuff with recommendations
+        res.send(result.rows);
+      } else {
+        res.send('oops this is embarassing :/ no recommendations');
+      }
+      client.end();
+    });
+  });
+};
+
 monder.feedback = function(res, uid, mid, feedback) {
   var client = new pg.Client(conString);
   client.connect(function(err) {
@@ -111,6 +137,15 @@ app.get('/getRecommendations/*', function(req, res) {
   var user = req.params[0];
   console.log(user);
   monder.load(res, user);
+});
+
+
+app.get('/getRecommendations/*/*', function(req, res) {
+  var user1 = req.params[0];
+  var user2 = req.params[1];
+  console.log(user1);
+  console.log(user2);
+  monder.loadTwo(res, user1, user2);
 });
 
 app.get('/feedback/*/*/*', function(req, res) {
